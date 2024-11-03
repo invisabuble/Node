@@ -10,9 +10,10 @@ services:
     image: apache2
     environment:
         - HOSTNAME=${apache_hostname}
-        - CERT_DIR=apache/${apache_cert_dir}
-        - SERVICE=${SERVICE}
     build:
+      args:
+          CERT_DIR: ${apache_cert_dir}
+          SERVICE: ${SERVICE}
       context: .
       dockerfile: apache/apache.dockerfile
     env_file: .env
