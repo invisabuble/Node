@@ -5,11 +5,11 @@ version: '3.8'
 services:
 
   apache:
-    hostname: ${apache_hostname}
-    container_name: ${apache_container_name}
+    hostname: ${apache_hostname}_${SERVICE}
+    container_name: ${apache_container_name}_${SERVICE}
     image: apache2
     environment:
-        - HOSTNAME=${apache_hostname}
+        - HOSTNAME=${apache_hostname}_${SERVICE}
     build:
       args:
           CERT_DIR: ${apache_cert_dir}
@@ -28,4 +28,4 @@ services:
     stdin_open: true
     network_mode: "host"
     extra_hosts:
-      - "${apache_hostname}:127.0.1.1"
+      - "${apache_hostname}_${SERVICE}:127.0.1.1"
