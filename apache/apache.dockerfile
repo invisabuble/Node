@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV PYTHONUNBUFFERED=1
 ARG CERT_DIR
 ARG SERVICE
+ENV SERVICE=$SERVICE
 
 RUN apt-get -y update && \
     apt-get -y upgrade && \
