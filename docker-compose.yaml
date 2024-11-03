@@ -1,0 +1,30 @@
+# Author : Luke Park
+
+version: '3.8'
+
+services:
+
+  apache:
+    hostname: ${apache_hostname}
+    container_name: ${apache_container_name}
+    image: apache2
+    environment:
+        - HOSTNAME=${apache_hostname}
+        - CERT_DIR=apache/${apache_cert_dir}
+        - SERVICE=${SERVICE}
+    build:
+      context: .
+      dockerfile: apache/apache.dockerfile
+    env_file: .env
+    volumes:
+      - ./apache/web/public:/var/www/html
+      - ./apache/web/private:/private
+    expose:
+      - '80'
+      - '8080'
+      - '443'
+    tty: true
+    stdin_open: true
+    network_mode: "host"
+    extra_hosts:
+      - "${apache_hostname}:127.0.1.1"
